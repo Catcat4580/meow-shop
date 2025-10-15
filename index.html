@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>喵商城 - 最佳購物體驗</title>
+    <title>遊戲商城 - 網路遊戲專屬商城</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -21,23 +21,25 @@
             --accent: #ffd166;
             --success: #06d6a0;
             --warning: #ff9f40;
+            --danger: #ef476f;
         }
 
         body {
-            background-color: #f0f2f5;
-            color: #333;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
             line-height: 1.6;
         }
 
         /* 頭部導航 */
         .header {
-            background: linear-gradient(135deg, var(--primary), #ff8e8e);
+            background: rgba(10, 15, 30, 0.95);
             color: white;
             padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 2px solid var(--primary);
         }
 
         .header-container {
@@ -55,6 +57,7 @@
             gap: 10px;
             font-size: 1.8rem;
             font-weight: 700;
+            color: var(--accent);
         }
 
         .logo i {
@@ -68,16 +71,32 @@
         }
 
         .nav-menu a {
-            color: white;
+            color: #ddd;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             padding: 8px 12px;
             border-radius: 4px;
+            position: relative;
         }
 
         .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.2);
+            color: var(--accent);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .nav-icons {
@@ -91,10 +110,12 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
+            color: #ddd;
         }
 
         .nav-icons i:hover {
             transform: scale(1.1);
+            color: var(--accent);
         }
 
         .cart-count {
@@ -129,6 +150,9 @@
             justify-content: center;
             font-weight: bold;
             cursor: pointer;
+            color: var(--dark);
+            font-size: 1.2rem;
+            border: 2px solid var(--primary);
         }
 
         /* 主要內容區域 */
@@ -140,19 +164,23 @@
 
         /* 英雄區域 */
         .hero-section {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') center/cover;
             color: white;
             text-align: center;
             padding: 5rem 2rem;
             border-radius: 15px;
             margin-bottom: 3rem;
             position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .hero-section h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero-section p {
@@ -161,6 +189,7 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            color: #e0e0e0;
         }
 
         .btn {
@@ -176,6 +205,7 @@
             display: inline-block;
             font-weight: 600;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 10px;
         }
 
         .btn:hover {
@@ -193,6 +223,64 @@
             background: #ff5252;
         }
 
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #3db8af;
+        }
+
+        /* 搜尋區域 */
+        .search-section {
+            background: rgba(255,255,255,0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .search-box {
+            display: flex;
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: rgba(255,255,255,0.15);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .search-btn {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #ffc44d;
+            transform: translateY(-2px);
+        }
+
         /* 分類導航 */
         .category-section {
             margin-bottom: 3rem;
@@ -201,7 +289,7 @@
         .section-title {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: white;
             position: relative;
             padding-bottom: 10px;
         }
@@ -231,15 +319,16 @@
         }
 
         .category-btn {
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
             padding: 12px 25px;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
             font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            color: #ddd;
         }
 
         .category-btn:hover, .category-btn.active {
@@ -258,31 +347,33 @@
         }
 
         .product-card {
-            background: white;
+            background: rgba(255,255,255,0.05);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: all 0.3s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            background: rgba(255,255,255,0.08);
         }
 
         .product-image {
             height: 220px;
             width: 100%;
-            background: #f8f9fa;
+            background: rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 4rem;
-            color: var(--primary);
+            color: var(--accent);
             position: relative;
         }
 
@@ -308,19 +399,19 @@
         .product-title {
             font-size: 1.2rem;
             margin-bottom: 0.8rem;
-            color: var(--dark);
+            color: white;
             font-weight: 600;
         }
 
         .product-price {
             font-size: 1.4rem;
             font-weight: bold;
-            color: var(--primary);
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
         .product-description {
-            color: #666;
+            color: #ccc;
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
             flex-grow: 1;
@@ -353,7 +444,7 @@
 
         .wishlist-btn {
             width: 45px;
-            background: #f0f0f0;
+            background: rgba(255,255,255,0.1);
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -361,10 +452,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #ddd;
         }
 
         .wishlist-btn:hover {
-            background: #ffebee;
+            background: rgba(255,255,255,0.2);
             color: var(--primary);
         }
 
@@ -376,20 +468,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.85);
             z-index: 2000;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: white;
+            background: rgba(20, 25, 45, 0.95);
             border-radius: 15px;
             width: 90%;
             max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
             position: relative;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .modal-header {
@@ -407,6 +501,11 @@
             font-size: 1.5rem;
             cursor: pointer;
             color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
         }
 
         .modal-body {
@@ -421,31 +520,34 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: #ddd;
         }
 
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: white;
             font-size: 1rem;
-            transition: border 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: var(--primary);
+            border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.2);
         }
 
         .auth-switch {
             text-align: center;
             margin-top: 15px;
-            color: #666;
+            color: #aaa;
         }
 
         .auth-switch a {
-            color: var(--primary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
         }
@@ -455,7 +557,7 @@
         }
 
         .error-message {
-            color: var(--primary);
+            color: var(--danger);
             font-size: 0.9rem;
             margin-top: 5px;
             display: none;
@@ -468,12 +570,13 @@
             right: -400px;
             width: 380px;
             height: 100vh;
-            background: white;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            background: rgba(20, 25, 45, 0.95);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.3);
             z-index: 1500;
             transition: right 0.4s ease;
             display: flex;
             flex-direction: column;
+            border-left: 1px solid rgba(255,255,255,0.1);
         }
 
         .cart-panel.open {
@@ -499,19 +602,19 @@
             display: flex;
             gap: 15px;
             padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .cart-item-image {
             width: 80px;
             height: 80px;
-            background: #f8f9fa;
+            background: rgba(255,255,255,0.05);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            color: var(--primary);
+            color: var(--accent);
         }
 
         .cart-item-details {
@@ -521,10 +624,11 @@
         .cart-item-title {
             font-weight: 600;
             margin-bottom: 5px;
+            color: white;
         }
 
         .cart-item-price {
-            color: var(--primary);
+            color: var(--accent);
             font-weight: bold;
             margin-bottom: 10px;
         }
@@ -537,26 +641,37 @@
         .quantity-btn {
             width: 30px;
             height: 30px;
-            background: #f0f0f0;
+            background: rgba(255,255,255,0.1);
             border: none;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         .remove-item {
-            color: #ff6b6b;
+            color: var(--danger);
             background: none;
             border: none;
             cursor: pointer;
             margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
         }
 
         .cart-footer {
             padding: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .cart-total {
@@ -565,6 +680,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 20px;
+            color: white;
         }
 
         .checkout-btn {
@@ -587,7 +703,7 @@
         .checkout-form {
             margin-top: 20px;
             padding: 15px;
-            background: #f8f9fa;
+            background: rgba(255,255,255,0.05);
             border-radius: 8px;
             display: none;
         }
@@ -598,19 +714,113 @@
 
         .checkout-form h3 {
             margin-bottom: 15px;
-            color: var(--dark);
+            color: white;
         }
 
         .checkout-form .form-group {
             margin-bottom: 15px;
         }
 
+        /* 後台管理 */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 380px;
+            height: 100vh;
+            background: rgba(20, 25, 45, 0.95);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+            z-index: 1600;
+            transition: left 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+        }
+
+        .admin-panel.open {
+            left: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .admin-section {
+            margin-bottom: 25px;
+        }
+
+        .admin-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .admin-list {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .admin-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .admin-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-item span {
+            color: #ddd;
+        }
+
+        .admin-item strong {
+            color: var(--accent);
+        }
+
+        .admin-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: var(--primary);
+        }
+
         /* 頁腳 */
         .footer {
-            background: var(--dark);
-            color: white;
+            background: rgba(10, 15, 30, 0.95);
+            color: #aaa;
             padding: 4rem 0 2rem;
             margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .footer-content {
@@ -626,6 +836,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 10px;
+            color: white;
         }
 
         .footer-section h3::after {
@@ -656,7 +867,7 @@
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--accent);
         }
 
         .social-icons {
@@ -714,6 +925,10 @@
             .cart-panel {
                 width: 320px;
             }
+            
+            .admin-panel {
+                width: 300px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -741,6 +956,10 @@
             .section-title {
                 font-size: 1.6rem;
             }
+            
+            .search-box {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 576px) {
@@ -765,6 +984,15 @@
             .cart-panel.open {
                 right: 0;
             }
+            
+            .admin-panel {
+                width: 100%;
+                left: -100%;
+            }
+            
+            .admin-panel.open {
+                left: 0;
+            }
         }
     </style>
 </head>
@@ -773,26 +1001,27 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">
-                <i class="fas fa-paw"></i>
-                <span>喵商城</span>
+                <i class="fas fa-gamepad"></i>
+                <span>遊戲商城</span>
             </div>
             <ul class="nav-menu">
                 <li><a href="#home"><i class="fas fa-home"></i> 首頁</a></li>
-                <li><a href="#products"><i class="fas fa-shopping-bag"></i> 商品</a></li>
+                <li><a href="#products"><i class="fas fa-store"></i> 商城</a></li>
                 <li><a href="#categories"><i class="fas fa-th-large"></i> 分類</a></li>
                 <li><a href="#deals"><i class="fas fa-tags"></i> 特價</a></li>
                 <li><a href="#about"><i class="fas fa-info-circle"></i> 關於</a></li>
             </ul>
             <div class="nav-icons">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" id="searchIcon"></i>
                 <i class="fas fa-heart"></i>
                 <div class="user-info">
-                    <div class="user-avatar" id="userAvatar">用</div>
+                    <div class="user-avatar" id="userAvatar">U</div>
                 </div>
                 <div style="position: relative;">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
+                <i class="fas fa-cogs" id="adminIcon"></i>
             </div>
         </div>
     </header>
@@ -801,151 +1030,39 @@
     <div class="main-container">
         <!-- 英雄區域 -->
         <section class="hero-section" id="home">
-            <h1>最可愛的購物體驗</h1>
-            <p>喵商城為您提供最優質的商品和最溫馨的購物環境，讓每一次購物都像與小貓咪玩耍一樣愉快！</p>
-            <a href="#products" class="btn">開始購物</a>
+            <h1>最頂級遊戲商城</h1>
+            <p>提供最新、最熱門的遊戲商品，讓您享受最棒的遊戲體驗！</p>
+            <a href="#products" class="btn">探索遊戲</a>
+            <a href="#deals" class="btn btn-secondary">特價商品</a>
+        </section>
+
+        <!-- 搜尋區域 -->
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="搜尋遊戲、道具、帳號...">
+                <button class="search-btn" id="searchBtn"><i class="fas fa-search"></i> 搜尋</button>
+            </div>
         </section>
 
         <!-- 分類導航 -->
         <section class="category-section" id="categories">
-            <h2 class="section-title">商品分類</h2>
+            <h2 class="section-title">遊戲分類</h2>
             <div class="categories">
-                <button class="category-btn active">全部商品</button>
-                <button class="category-btn">寵物用品</button>
-                <button class="category-btn">零食零食</button>
-                <button class="category-btn">玩具</button>
-                <button class="category-btn">服飾配件</button>
-                <button class="category-btn">生活用品</button>
-                <button class="category-btn">美容護理</button>
+                <button class="category-btn active">全部</button>
+                <button class="category-btn">角色扮演</button>
+                <button class="category-btn">動作冒險</button>
+                <button class="category-btn">射擊遊戲</button>
+                <button class="category-btn">策略模擬</button>
+                <button class="category-btn">競技遊戲</button>
+                <button class="category-btn">休閒益智</button>
             </div>
         </section>
 
         <!-- 商品展示 -->
         <section id="products">
-            <h2 class="section-title">熱銷商品</h2>
-            <div class="products-grid">
-                <!-- 商品卡片 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-paw"></i>
-                        <span class="product-badge">熱銷</span>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">可愛小貓玩具</h3>
-                        <div class="product-price">NT$129</div>
-                        <p class="product-description">柔軟毛絨材質，適合小貓抓咬玩耍，安全無毒。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="1" data-name="可愛小貓玩具" data-price="129">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 2 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-cookie"></i>
-                        <span class="product-badge">新品</span>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">小貓專用零食</h3>
-                        <div class="product-price">NT$89</div>
-                        <p class="product-description">天然食材製成，營養豐富，小貓超愛吃的美味零食。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="2" data-name="小貓專用零食" data-price="89">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-tshirt"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">貓咪T恤</h3>
-                        <div class="product-price">NT$199</div>
-                        <p class="product-description">舒適棉質材質，印有可愛猫咪圖案，適合日常穿搭。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="3" data-name="貓咪T恤" data-price="199">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-cat"></i>
-                        <span class="product-badge">限時</span>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">貓咪寢具</h3>
-                        <div class="product-price">NT$299</div>
-                        <p class="product-description">柔軟親膚材質，讓您的小貓享受舒適睡眠時光。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="4" data-name="貓咪寢具" data-price="299">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 5 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-dog"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">寵物牽引繩</h3>
-                        <div class="product-price">NT$159</div>
-                        <p class="product-description">耐用尼龍材質，舒適防滑設計，讓遛寵物更安全。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="5" data-name="寵物牽引繩" data-price="159">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 商品卡片 6 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <i class="fas fa-bath"></i>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">寵物洗髮精</h3>
-                        <div class="product-price">NT$79</div>
-                        <p class="product-description">天然植物配方，溫和不刺激，讓您的寵物毛髮柔順亮麗。</p>
-                        <div class="product-actions">
-                            <button class="add-to-cart" data-id="6" data-name="寵物洗髮精" data-price="79">
-                                <i class="fas fa-shopping-cart"></i> 加入購物車
-                            </button>
-                            <button class="wishlist-btn">
-                                <i class="far fa-heart"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="section-title">熱門商品</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- 商品卡片將在此動態生成 -->
             </div>
         </section>
     </div>
@@ -1022,24 +1139,56 @@
         </div>
     </div>
 
+    <!-- 後台管理面板 -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3>後台管理</h3>
+            <span class="close-modal" id="closeAdmin">&times;</span>
+        </div>
+        <div class="admin-content">
+            <div class="admin-section">
+                <h3>已註冊用戶</h3>
+                <div class="admin-list" id="usersList">
+                    <!-- 用戶列表將在此動態生成 -->
+                </div>
+            </div>
+            <div class="admin-section">
+                <h3>購物車紀錄</h3>
+                <div class="admin-list" id="cartHistoryList">
+                    <!-- 購物車紀錄將在此動態生成 -->
+                </div>
+            </div>
+            <div class="admin-section">
+                <h3>消費紀錄</h3>
+                <div class="admin-list" id="purchaseHistoryList">
+                    <!-- 消費紀錄將在此動態生成 -->
+                </div>
+            </div>
+        </div>
+        <div class="admin-controls">
+            <button class="admin-btn" id="refreshBtn">重新整理</button>
+            <button class="admin-btn" id="exportBtn">匯出資料</button>
+        </div>
+    </div>
+
     <!-- 頁腳 -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>喵商城</h3>
-                <p>提供最優質的寵物用品和服務，讓您的小貓咪享受最好的生活品質。</p>
+                <h3>遊戲商城</h3>
+                <p>提供最優質的遊戲商品和服務，讓您的遊戲體驗更上一層樓。</p>
                 <div class="social-icons">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                    <a href="#"><i class="fab fa-discord"></i></a>
                 </div>
             </div>
             <div class="footer-section">
                 <h3>快速連結</h3>
                 <ul class="footer-links">
                     <li><a href="#home"><i class="fas fa-chevron-right"></i> 首頁</a></li>
-                    <li><a href="#products"><i class="fas fa-chevron-right"></i> 商品</a></li>
+                    <li><a href="#products"><i class="fas fa-chevron-right"></i> 商城</a></li>
                     <li><a href="#categories"><i class="fas fa-chevron-right"></i> 分類</a></li>
                     <li><a href="#deals"><i class="fas fa-chevron-right"></i> 特價商品</a></li>
                     <li><a href="#about"><i class="fas fa-chevron-right"></i> 關於我們</a></li>
@@ -1050,13 +1199,13 @@
                 <ul class="footer-links">
                     <li><i class="fas fa-map-marker-alt"></i> 台北市信義區忠孝東路</li>
                     <li><i class="fas fa-phone"></i> 02-1234-5678</li>
-                    <li><i class="fas fa-envelope"></i> service@miao.com</li>
+                    <li><i class="fas fa-envelope"></i> service@gameshop.com</li>
                     <li><i class="fas fa-clock"></i> 週一至週日 9:00-21:00</li>
                 </ul>
             </div>
         </div>
         <div class="copyright">
-            <p>&copy; 2024 喵商城. 保留所有權利.</p>
+            <p>&copy; 2024 遊戲商城. 保留所有權利.</p>
         </div>
     </footer>
 
@@ -1065,7 +1214,15 @@
         let cart = [];
         let currentUser = null;
         let isLogin = false;
-        let users = []; // 模擬用戶資料庫
+        let users = [
+            { email: "admin@example.com", password: "admin123", name: "管理員", avatar: "https://ui-avatars.com/api/?name=Admin&size=40&color=ff6b6b&background=1a1a2e" },
+            { email: "player1@example.com", password: "player123", name: "玩家1", avatar: "https://ui-avatars.com/api/?name=Player1&size=40&color=4ecdc4&background=1a1a2e" },
+            { email: "player2@example.com", password: "player456", name: "玩家2", avatar: "https://ui-avatars.com/api/?name=Player2&size=40&color=ffd166&background=1a1a2e" }
+        ]; // 模擬用戶資料庫
+        let purchaseHistory = [
+            { user: "player1@example.com", items: ["遊戲帳號", "遊戲道具"], amount: 1200, date: "2024-01-15" },
+            { user: "player2@example.com", items: ["遊戲帳號"], amount: 800, date: "2024-01-10" }
+        ]; // 模擬消費紀錄
 
         // DOM元素
         const authModal = document.getElementById('authModal');
@@ -1086,23 +1243,45 @@
         const checkoutBtn = document.getElementById('checkoutBtn');
         const checkoutForm = document.getElementById('checkoutForm');
         const confirmCheckout = document.getElementById('confirmCheckout');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchIcon = document.getElementById('searchIcon');
+        const adminIcon = document.getElementById('adminIcon');
+        const adminPanel = document.getElementById('adminPanel');
+        const closeAdmin = document.getElementById('closeAdmin');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const productsGrid = document.getElementById('productsGrid');
+        const usersList = document.getElementById('usersList');
+        const cartHistoryList = document.getElementById('cartHistoryList');
+        const purchaseHistoryList = document.getElementById('purchaseHistoryList');
+
+        // 模擬遊戲商品數據
+        const gameProducts = [
+            { id: 1, name: "英雄聯盟帳號", price: 800, description: "完整英雄聯盟帳號，包含所有英雄和皮膚", category: "角色扮演", image: "fa-gamepad" },
+            { id: 2, name: "DOTA2帳號", price: 1200, description: "DOTA2高級帳號，包含所有英雄和物品", category: "動作冒險", image: "fa-gamepad" },
+            { id: 3, name: "戰爭雷霆帳號", price: 600, description: "戰爭雷霆帳號，包含所有載具和武器", category: "射擊遊戲", image: "fa-gamepad" },
+            { id: 4, name: "絕地求生道具包", price: 300, description: "絕地求生高級道具包，包含所有武器和裝備", category: "射擊遊戲", image: "fa-gamepad" },
+            { id: 5, name: "我的世界伺服器", price: 500, description: "我的世界私人伺服器，包含所有模組", category: "策略模擬", image: "fa-gamepad" },
+            { id: 6, name: "星露谷物語帳號", price: 400, description: "星露谷物語完整帳號，包含所有任務和物品", category: "休閒益智", image: "fa-gamepad" },
+            { id: 7, name: "原神帳號", price: 1000, description: "原神高級帳號，包含所有角色和武器", category: "角色扮演", image: "fa-gamepad" },
+            { id: 8, name: "英雄聯盟皮膚", price: 150, description: "英雄聯盟限定皮膚，獨特外觀", category: "角色扮演", image: "fa-gamepad" }
+        ];
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 檢查本地存儲中的用戶信息
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                isLogin = true;
-                updateUserInfo();
-            }
-            
             // 初始化購物車
             loadCartFromStorage();
             updateCartDisplay();
             
+            // 初始化商品列表
+            renderProducts(gameProducts);
+            
             // 綁定事件
             bindEvents();
+            
+            // 加載用戶資料
+            loadUsersData();
         });
 
         // 綁定事件
@@ -1119,14 +1298,31 @@
             checkoutBtn.addEventListener('click', showCheckoutForm);
             confirmCheckout.addEventListener('click', processCheckout);
             
-            // 加入購物車
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', addToCart);
+            // 搜尋功能
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            searchIcon.addEventListener('click', function() {
+                searchInput.focus();
             });
             
-            // 收藏按鈕
-            wishlistButtons.forEach(button => {
-                button.addEventListener('click', toggleWishlist);
+            // 後台管理
+            adminIcon.addEventListener('click', openAdminPanel);
+            closeAdmin.addEventListener('click', closeAdminPanel);
+            refreshBtn.addEventListener('click', loadUsersData);
+            exportBtn.addEventListener('click', exportData);
+            
+            // 加入購物車
+            document.body.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    addToCart(e);
+                }
+                if (e.target.classList.contains('wishlist-btn')) {
+                    toggleWishlist(e);
+                }
             });
             
             // 購物車項目操作
@@ -1244,7 +1440,12 @@
                 }
                 
                 // 創建新用戶
-                const newUser = { email, password, name: email.split('@')[0] };
+                const newUser = { 
+                    email, 
+                    password, 
+                    name: email.split('@')[0],
+                    avatar: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&size=40&color=ff6b6b&background=1a1a2e` 
+                };
                 users.push(newUser);
                 localStorage.setItem('users', JSON.stringify(users));
                 
@@ -1271,7 +1472,13 @@
                     closeAuthModal();
                     alert('登入成功！');
                 } else {
-                    alert('電子信箱或密碼錯誤！');
+                    // 檢查是否有此信箱
+                    const existingUser = users.find(u => u.email === email);
+                    if (existingUser) {
+                        alert('密碼錯誤！');
+                    } else {
+                        alert('此電子信箱尚未註冊！');
+                    }
                 }
             }
         }
@@ -1281,15 +1488,23 @@
             if (isLogin) {
                 userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
                 userAvatar.style.background = 'var(--primary)';
+                userAvatar.style.color = 'white';
+                userAvatar.style.border = '2px solid var(--accent)';
+                // 更新頭像顯示
+                if (currentUser.avatar) {
+                    // 可以在這裡設置頭像圖片
+                }
             } else {
-                userAvatar.textContent = '用';
+                userAvatar.textContent = 'U';
                 userAvatar.style.background = '#f0f0f0';
+                userAvatar.style.color = '#333';
+                userAvatar.style.border = '2px solid #ddd';
             }
         }
 
         // 加入購物車
         function addToCart(e) {
-            const button = e.currentTarget;
+            const button = e.target.closest('.add-to-cart');
             const id = button.dataset.id;
             const name = button.dataset.name;
             const price = parseInt(button.dataset.price);
@@ -1331,7 +1546,7 @@
 
         // 切換收藏
         function toggleWishlist(e) {
-            const button = e.currentTarget;
+            const button = e.target.closest('.wishlist-btn');
             const icon = button.querySelector('i');
             
             if (icon.classList.contains('far')) {
@@ -1385,6 +1600,18 @@
             
             // 顯示結帳成功訊息
             alert(`結帳成功！\n感謝您的購買！\n訂單將寄送到：${address}`);
+            
+            // 保存消費紀錄
+            if (currentUser) {
+                const purchaseRecord = {
+                    user: currentUser.email,
+                    items: cart.map(item => item.name),
+                    amount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    date: new Date().toISOString().split('T')[0]
+                };
+                purchaseHistory.push(purchaseRecord);
+                localStorage.setItem('purchaseHistory', JSON.stringify(purchaseHistory));
+            }
             
             // 清空購物車
             cart = [];
@@ -1454,7 +1681,7 @@
                 cartHTML += `
                     <div class="cart-item" data-id="${item.id}">
                         <div class="cart-item-image">
-                            <i class="fas fa-paw"></i>
+                            <i class="fas ${item.image || 'fa-gamepad'}"></i>
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">${item.name}</div>
@@ -1490,12 +1717,117 @@
             }
         }
 
+        // 渲染商品
+        function renderProducts(products) {
+            productsGrid.innerHTML = '';
+            products.forEach(product => {
+                productsGrid.innerHTML += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <i class="fas ${product.image || 'fa-gamepad'}"></i>
+                            <span class="product-badge">${product.category}</span>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-price">NT$${product.price}</div>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-actions">
+                                <button class="add-to-cart" data-id="${product.id}" data-name="${product.name}" data-price="${product.price}">
+                                    <i class="fas fa-shopping-cart"></i> 加入購物車
+                                </button>
+                                <button class="wishlist-btn">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // 搜尋功能
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (!searchTerm.trim()) {
+                renderProducts(gameProducts);
+                return;
+            }
+            
+            const filteredProducts = gameProducts.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            
+            renderProducts(filteredProducts);
+        }
+
+        // 開啟後台管理面板
+        function openAdminPanel() {
+            if (!currentUser || currentUser.email !== "admin@example.com") {
+                alert("僅管理員可使用後台！");
+                return;
+            }
+            adminPanel.classList.add('open');
+            loadUsersData();
+        }
+
+        // 關閉後台管理面板
+        function closeAdminPanel() {
+            adminPanel.classList.remove('open');
+        }
+
+        // 加載用戶資料
+        function loadUsersData() {
+            // 更新用戶列表
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                usersList.innerHTML += `
+                    <div class="admin-item">
+                        <span><strong>${user.name}</strong></span>
+                        <span>${user.email}</span>
+                    </div>
+                `;
+            });
+            
+            // 更新購物車紀錄
+            cartHistoryList.innerHTML = '';
+            // 這裡可以顯示購物車歷史
+            cartHistoryList.innerHTML = `<div class="admin-item"><span>目前購物車紀錄</span></div>`;
+            
+            // 更新消費紀錄
+            purchaseHistoryList.innerHTML = '';
+            purchaseHistory.forEach(record => {
+                purchaseHistoryList.innerHTML += `
+                    <div class="admin-item">
+                        <span><strong>${record.user}</strong></span>
+                        <span>NT$${record.amount}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // 匯出資料
+        function exportData() {
+            alert('資料匯出功能已啟用，實際應用中會產生CSV檔案');
+            // 這裡應該實現真正的匯出功能
+        }
+
         // 分類切換
         const categoryButtons = document.querySelectorAll('.category-btn');
         categoryButtons.forEach(button => {
             button.addEventListener('click', function() {
                 categoryButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
+                
+                // 這裡可以實現分類篩選功能
+                const category = this.textContent;
+                if (category === '全部') {
+                    renderProducts(gameProducts);
+                } else {
+                    const filtered = gameProducts.filter(p => p.category === category);
+                    renderProducts(filtered);
+                }
             });
         });
 
