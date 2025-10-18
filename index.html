@@ -6,13 +6,6 @@
     <title>喵商城 - 你最佳的消費地點</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Microsoft JhengHei', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
         :root {
             --primary: #ff6b6b;
             --secondary: #4ecdc4;
@@ -22,17 +15,35 @@
             --success: #06d6a0;
             --warning: #ff9f40;
             --danger: #ef476f;
+            --bg-color: #f0f2f5;
+            --text-color: #333;
+            --header-bg: linear-gradient(135deg, var(--primary), #ff8e8e);
+            --card-bg: white;
+            --border-color: #e0e0e0;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --hover-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a2e;
+            --text-color: #fff;
+            --header-bg: rgba(10, 15, 30, 0.95);
+            --card-bg: rgba(255,255,255,0.05);
+            --border-color: rgba(255,255,255,0.1);
+            --shadow: 0 5px 15px rgba(0,0,0,0.3);
+            --hover-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
         body {
-            background-color: #f0f2f5;
-            color: #333;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         /* 頭部導航 */
         .header {
-            background: linear-gradient(135deg, var(--primary), #ff8e8e);
+            background: var(--header-bg);
             color: white;
             padding: 1rem 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -58,8 +69,10 @@
             font-weight: 700;
         }
 
-        .logo i {
-            color: var(--accent);
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
         }
 
         .nav-menu {
@@ -92,6 +105,7 @@
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
+            color: white;
         }
 
         .nav-icons i:hover {
@@ -130,6 +144,7 @@
             justify-content: center;
             font-weight: bold;
             cursor: pointer;
+            color: var(--dark);
         }
 
         /* 主要內容區域 */
@@ -202,7 +217,7 @@
         .section-title {
             font-size: 2rem;
             margin-bottom: 1.5rem;
-            color: var(--dark);
+            color: var(--text-color);
             position: relative;
             padding-bottom: 10px;
         }
@@ -232,15 +247,15 @@
         }
 
         .category-btn {
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
             padding: 12px 25px;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
             font-weight: 500;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
 
         .category-btn:hover, .category-btn.active {
@@ -259,26 +274,27 @@
         }
 
         .product-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
             display: flex;
             flex-direction: column;
             height: 100%;
+            border: 1px solid var(--border-color);
         }
 
         .product-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: var(--hover-shadow);
         }
 
         .product-image {
             height: 220px;
             width: 100%;
-            background: #f8f9fa;
+            background: rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -309,7 +325,7 @@
         .product-title {
             font-size: 1.2rem;
             margin-bottom: 0.8rem;
-            color: var(--dark);
+            color: var(--text-color);
             font-weight: 600;
         }
 
@@ -354,7 +370,7 @@
 
         .wishlist-btn {
             width: 45px;
-            background: #f0f0f0;
+            background: rgba(255,255,255,0.1);
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -362,10 +378,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #ddd;
         }
 
         .wishlist-btn:hover {
-            background: #ffebee;
+            background: rgba(255,255,255,0.2);
             color: var(--primary);
         }
 
@@ -384,7 +401,7 @@
         }
 
         .modal-content {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             width: 90%;
             max-width: 500px;
@@ -422,31 +439,34 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--text-color);
         }
 
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            color: white;
             font-size: 1rem;
             transition: border 0.3s ease;
         }
 
         .form-control:focus {
-            border-color: var(--primary);
+            border-color: var(--accent);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.2);
         }
 
         .auth-switch {
             text-align: center;
             margin-top: 15px;
-            color: #666;
+            color: #aaa;
         }
 
         .auth-switch a {
-            color: var(--primary);
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
         }
@@ -456,7 +476,7 @@
         }
 
         .error-message {
-            color: var(--primary);
+            color: var(--danger);
             font-size: 0.9rem;
             margin-top: 5px;
             display: none;
@@ -469,12 +489,13 @@
             right: -400px;
             width: 380px;
             height: 100vh;
-            background: white;
+            background: var(--card-bg);
             box-shadow: -5px 0 25px rgba(0,0,0,0.1);
             z-index: 1500;
             transition: right 0.4s ease;
             display: flex;
             flex-direction: column;
+            border-left: 1px solid var(--border-color);
         }
 
         .cart-panel.open {
@@ -500,13 +521,13 @@
             display: flex;
             gap: 15px;
             padding: 15px 0;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .cart-item-image {
             width: 80px;
             height: 80px;
-            background: #f8f9fa;
+            background: rgba(0,0,0,0.1);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -522,6 +543,7 @@
         .cart-item-title {
             font-weight: 600;
             margin-bottom: 5px;
+            color: var(--text-color);
         }
 
         .cart-item-price {
@@ -538,26 +560,37 @@
         .quantity-btn {
             width: 30px;
             height: 30px;
-            background: #f0f0f0;
+            background: rgba(255,255,255,0.1);
             border: none;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            background: rgba(255,255,255,0.2);
         }
 
         .remove-item {
-            color: #ff6b6b;
+            color: var(--danger);
             background: none;
             border: none;
             cursor: pointer;
             margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-item:hover {
+            transform: scale(1.1);
         }
 
         .cart-footer {
             padding: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid var(--border-color);
         }
 
         .cart-total {
@@ -566,6 +599,7 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-bottom: 20px;
+            color: var(--text-color);
         }
 
         .checkout-btn {
@@ -585,12 +619,178 @@
             background: #05c190;
         }
 
+        /* 商品詳情頁面 */
+        .product-detail {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .product-detail-image {
+            height: 300px;
+            width: 100%;
+            background: rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .product-detail-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .product-detail-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-description {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        /* 後台管理 */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            left: -400px;
+            width: 380px;
+            height: 100vh;
+            background: var(--card-bg);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+            z-index: 1600;
+            transition: left 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--border-color);
+            padding: 20px;
+        }
+
+        .admin-panel.open {
+            left: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .admin-content {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .admin-section {
+            margin-bottom: 25px;
+        }
+
+        .admin-section h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .admin-list {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .admin-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .admin-item:last-child {
+            border-bottom: none;
+        }
+
+        .admin-item span {
+            color: #ddd;
+        }
+
+        .admin-item strong {
+            color: var(--accent);
+        }
+
+        .admin-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .admin-btn:hover {
+            background: var(--primary);
+        }
+
+        /* 主題切換按鈕 */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: #ff5252;
+            transform: scale(1.1);
+        }
+
         /* 頁腳 */
         .footer {
             background: var(--dark);
             color: white;
             padding: 4rem 0 2rem;
             margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer-content {
@@ -606,6 +806,7 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 10px;
+            color: white;
         }
 
         .footer-section h3::after {
@@ -636,7 +837,7 @@
         }
 
         .footer-links a:hover {
-            color: white;
+            color: var(--accent);
         }
 
         .social-icons {
@@ -694,6 +895,10 @@
             .cart-panel {
                 width: 320px;
             }
+            
+            .admin-panel {
+                width: 300px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -721,6 +926,13 @@
             .section-title {
                 font-size: 1.6rem;
             }
+            
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                right: 10px;
+                bottom: 10px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -745,6 +957,15 @@
             .cart-panel.open {
                 right: 0;
             }
+            
+            .admin-panel {
+                width: 100%;
+                left: -100%;
+            }
+            
+            .admin-panel.open {
+                left: 0;
+            }
         }
     </style>
 </head>
@@ -753,7 +974,7 @@
     <header class="header">
         <div class="header-container">
             <div class="logo">
-                <i class="fas fa-paw"></i>
+                <img src="https://i.imgur.com/6FqKZkX.png" alt="喵商城商標">
                 <span>喵商城</span>
             </div>
             <ul class="nav-menu">
@@ -774,6 +995,7 @@
                     <i class="fas fa-shopping-cart"></i>
                     <span class="cart-count" id="cartCount">0</span>
                 </div>
+                <i class="fas fa-cogs" id="adminIcon"></i>
             </div>
         </div>
     </header>
@@ -948,6 +1170,63 @@
         </div>
     </div>
 
+    <!-- 後台管理面板 -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3>後台管理</h3>
+            <span class="close-modal" id="closeAdmin">&times;</span>
+        </div>
+        <div class="admin-content">
+            <div class="admin-section">
+                <h3>已註冊用戶</h3>
+                <div class="admin-list" id="usersList">
+                    <div class="admin-item">
+                        <span><strong>管理員</strong></span>
+                        <span>admin@example.com</span>
+                    </div>
+                    <div class="admin-item">
+                        <span><strong>玩家1</strong></span>
+                        <span>player1@example.com</span>
+                    </div>
+                    <div class="admin-item">
+                        <span><strong>玩家2</strong></span>
+                        <span>player2@example.com</span>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-section">
+                <h3>購物車紀錄</h3>
+                <div class="admin-list" id="cartHistoryList">
+                    <div class="admin-item">
+                        <span>目前購物車紀錄</span>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-section">
+                <h3>消費紀錄</h3>
+                <div class="admin-list" id="purchaseHistoryList">
+                    <div class="admin-item">
+                        <span><strong>player1@example.com</strong></span>
+                        <span>NT$1200</span>
+                    </div>
+                    <div class="admin-item">
+                        <span><strong>player2@example.com</strong></span>
+                        <span>NT$800</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-controls">
+            <button class="admin-btn" id="refreshBtn">重新整理</button>
+            <button class="admin-btn" id="exportBtn">匯出資料</button>
+        </div>
+    </div>
+
+    <!-- 主題切換按鈕 -->
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
     <!-- 頁腳 -->
     <footer class="footer">
         <div class="footer-content">
@@ -992,6 +1271,15 @@
         let cart = [];
         let currentUser = null;
         let isLogin = false;
+        let users = [
+            { email: "admin@example.com", password: "admin123", name: "管理員", avatar: "https://ui-avatars.com/api/?name=Admin&size=40&color=ff6b6b&background=1a1a2e" },
+            { email: "player1@example.com", password: "player123", name: "玩家1", avatar: "https://ui-avatars.com/api/?name=Player1&size=40&color=4ecdc4&background=1a1a2e" },
+            { email: "player2@example.com", password: "player456", name: "玩家2", avatar: "https://ui-avatars.com/api/?name=Player2&size=40&color=ffd166&background=1a1a2e" }
+        ]; // 模擬用戶資料庫
+        let purchaseHistory = [
+            { user: "player1@example.com", items: ["遊戲帳號", "遊戲道具"], amount: 1200, date: "2024-01-15" },
+            { user: "player2@example.com", items: ["遊戲帳號"], amount: 800, date: "2024-01-10" }
+        ]; // 模擬消費紀錄
 
         // DOM元素
         const authModal = document.getElementById('authModal');
@@ -1009,23 +1297,44 @@
         const userAvatar = document.getElementById('userAvatar');
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
         const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const checkoutForm = document.getElementById('checkoutForm');
+        const confirmCheckout = document.getElementById('confirmCheckout');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchIcon = document.getElementById('searchIcon');
+        const adminIcon = document.getElementById('adminIcon');
+        const adminPanel = document.getElementById('adminPanel');
+        const closeAdmin = document.getElementById('closeAdmin');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const productsGrid = document.getElementById('productsGrid');
+        const usersList = document.getElementById('usersList');
+        const cartHistoryList = document.getElementById('cartHistoryList');
+        const purchaseHistoryList = document.getElementById('purchaseHistoryList');
+        const themeToggle = document.getElementById('themeToggle');
 
         // 初始化
         document.addEventListener('DOMContentLoaded', function() {
-            // 檢查本地存儲中的用戶信息
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                isLogin = true;
-                updateUserInfo();
-            }
+            // 初始化購物車
+            loadCartFromStorage();
+            updateCartDisplay();
             
             // 綁定事件
             bindEvents();
             
-            // 初始化購物車
-            loadCartFromStorage();
-            updateCartDisplay();
+            // 加載用戶資料
+            loadUsersData();
+            
+            // 檢查主題偏好
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
         });
 
         // 綁定事件
@@ -1039,28 +1348,119 @@
             // 購物車
             document.querySelector('.fa-shopping-cart').addEventListener('click', openCartPanel);
             closeCart.addEventListener('click', closeCartPanel);
+            checkoutBtn.addEventListener('click', showCheckoutForm);
+            confirmCheckout.addEventListener('click', processCheckout);
             
-            // 加入購物車
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', addToCart);
+            // 搜尋功能
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            searchIcon.addEventListener('click', function() {
+                searchInput.focus();
             });
             
-            // 收藏按鈕
-            wishlistButtons.forEach(button => {
-                button.addEventListener('click', toggleWishlist);
+            // 後台管理
+            adminIcon.addEventListener('click', openAdminPanel);
+            closeAdmin.addEventListener('click', closeAdminPanel);
+            refreshBtn.addEventListener('click', loadUsersData);
+            exportBtn.addEventListener('click', exportData);
+            
+            // 加入購物車
+            document.body.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
+                    addToCart(e);
+                }
+                if (e.target.classList.contains('wishlist-btn')) {
+                    toggleWishlist(e);
+                }
             });
             
             // 購物車項目操作
             cartItems.addEventListener('click', handleCartActions);
+            
+            // 表單驗證
+            document.getElementById('email').addEventListener('blur', validateEmail);
+            document.getElementById('password').addEventListener('blur', validatePassword);
+            document.getElementById('confirmPassword').addEventListener('blur', validateConfirmPassword);
+            
+            // 主題切換
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // 切換主題
+        function toggleTheme() {
+            if (document.body.hasAttribute('data-theme')) {
+                document.body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // 驗證電子信箱格式
+        function validateEmail() {
+            const email = document.getElementById('email').value;
+            const emailError = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (!emailRegex.test(email)) {
+                emailError.style.display = 'block';
+                return false;
+            } else {
+                emailError.style.display = 'none';
+                return true;
+            }
+        }
+
+        // 驗證密碼
+        function validatePassword() {
+            const password = document.getElementById('password').value;
+            const passwordError = document.getElementById('passwordError');
+            
+            if (password.length < 6) {
+                passwordError.style.display = 'block';
+                return false;
+            } else {
+                passwordError.style.display = 'none';
+                return true;
+            }
+        }
+
+        // 驗證確認密碼
+        function validateConfirmPassword() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+            
+            if (password !== confirmPassword) {
+                confirmPasswordError.style.display = 'block';
+                return false;
+            } else {
+                confirmPasswordError.style.display = 'none';
+                return true;
+            }
         }
 
         // 開啟登入/註冊模態框
         function openAuthModal() {
-            authModal.style.display = 'flex';
-            authTitle.textContent = '會員登入';
-            authSwitchText.innerHTML = '還沒有帳號？<a href="#" id="switchAuth">立即註冊</a>';
-            document.getElementById('switchAuth').addEventListener('click', toggleAuthMode);
-            confirmPasswordGroup.style.display = 'none';
+            // 只有未登入時才能打開登入視窗
+            if (!isLogin) {
+                authModal.style.display = 'flex';
+                authTitle.textContent = '會員登入';
+                authSwitchText.innerHTML = '還沒有帳號？<a href="#" id="switchAuth">立即註冊</a>';
+                document.getElementById('switchAuth').addEventListener('click', toggleAuthMode);
+                confirmPasswordGroup.style.display = 'none';
+                // 清除錯誤訊息
+                document.getElementById('emailError').style.display = 'none';
+                document.getElementById('passwordError').style.display = 'none';
+                document.getElementById('confirmPasswordError').style.display = 'none';
+            }
         }
 
         // 關閉登入/註冊模態框
@@ -1091,29 +1491,63 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
+            // 驗證表單
+            const isEmailValid = validateEmail();
+            const isPasswordValid = validatePassword();
+            
             if (authTitle.textContent === '會員註冊') {
-                if (password !== confirmPassword) {
-                    alert('密碼與確認密碼不一致！');
+                const isConfirmPasswordValid = validateConfirmPassword();
+                if (!isEmailValid || !isPasswordValid || !isConfirmPasswordValid) {
                     return;
                 }
-                // 模擬註冊成功
-                currentUser = { email, name: email.split('@')[0] };
+                
+                // 檢查信箱是否已註冊
+                const existingUser = users.find(user => user.email === email);
+                if (existingUser) {
+                    alert('此電子信箱已被註冊！');
+                    return;
+                }
+                
+                // 創建新用戶
+                const newUser = { 
+                    email, 
+                    password, 
+                    name: email.split('@')[0],
+                    avatar: `https://ui-avatars.com/api/?name=${email.split('@')[0]}&size=40&color=ff6b6b&background=1a1a2e` 
+                };
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                // 登入用戶
+                currentUser = newUser;
                 localStorage.setItem('currentUser', JSON.stringify(currentUser));
                 isLogin = true;
                 updateUserInfo();
                 closeAuthModal();
                 alert('註冊成功！');
             } else {
-                // 模擬登入
-                if (email && password) {
-                    currentUser = { email, name: email.split('@')[0] };
+                // 登入驗證
+                if (!isEmailValid || !isPasswordValid) {
+                    return;
+                }
+                
+                // 查找用戶
+                const user = users.find(u => u.email === email && u.password === password);
+                if (user) {
+                    currentUser = user;
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
                     isLogin = true;
                     updateUserInfo();
                     closeAuthModal();
                     alert('登入成功！');
                 } else {
-                    alert('請填寫正確的帳號密碼！');
+                    // 檢查是否有此信箱
+                    const existingUser = users.find(u => u.email === email);
+                    if (existingUser) {
+                        alert('密碼錯誤！');
+                    } else {
+                        alert('此電子信箱尚未註冊！');
+                    }
                 }
             }
         }
@@ -1123,18 +1557,33 @@
             if (isLogin) {
                 userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
                 userAvatar.style.background = 'var(--primary)';
+                userAvatar.style.color = 'white';
+                userAvatar.style.border = '2px solid var(--accent)';
+                // 更新頭像顯示
+                if (currentUser.avatar) {
+                    // 可以在這裡設置頭像圖片
+                }
             } else {
                 userAvatar.textContent = '用';
                 userAvatar.style.background = '#f0f0f0';
+                userAvatar.style.color = '#333';
+                userAvatar.style.border = '2px solid #ddd';
             }
         }
 
         // 加入購物車
         function addToCart(e) {
-            const button = e.currentTarget;
+            const button = e.target.closest('.add-to-cart');
             const id = button.dataset.id;
             const name = button.dataset.name;
             const price = parseInt(button.dataset.price);
+            
+            // 檢查用戶是否登入
+            if (!isLogin) {
+                alert('請先登入才能加入購物車！');
+                openAuthModal();
+                return;
+            }
             
             // 檢查商品是否已在購物車中
             const existingItem = cart.find(item => item.id === id);
@@ -1166,7 +1615,7 @@
 
         // 切換收藏
         function toggleWishlist(e) {
-            const button = e.currentTarget;
+            const button = e.target.closest('.wishlist-btn');
             const icon = button.querySelector('i');
             
             if (icon.classList.contains('far')) {
@@ -1182,6 +1631,13 @@
 
         // 開啟購物車面板
         function openCartPanel() {
+            // 檢查用戶是否登入
+            if (!isLogin) {
+                alert('請先登入才能查看購物車！');
+                openAuthModal();
+                return;
+            }
+            
             cartPanel.classList.add('open');
             updateCartDisplay();
         }
@@ -1189,6 +1645,50 @@
         // 關閉購物車面板
         function closeCartPanel() {
             cartPanel.classList.remove('open');
+        }
+
+        // 顯示結帳表單
+        function showCheckoutForm() {
+            if (cart.length === 0) {
+                alert('購物車是空的！');
+                return;
+            }
+            checkoutForm.classList.add('active');
+        }
+
+        // 處理結帳
+        function processCheckout() {
+            const name = document.getElementById('checkoutName').value;
+            const phone = document.getElementById('checkoutPhone').value;
+            const address = document.getElementById('checkoutAddress').value;
+            
+            if (!name || !phone || !address) {
+                alert('請填寫所有結帳資訊！');
+                return;
+            }
+            
+            // 顯示結帳成功訊息
+            alert(`結帳成功！\n感謝您的購買！\n訂單將寄送到：${address}`);
+            
+            // 保存消費紀錄
+            if (currentUser) {
+                const purchaseRecord = {
+                    user: currentUser.email,
+                    items: cart.map(item => item.name),
+                    amount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    date: new Date().toISOString().split('T')[0]
+                };
+                purchaseHistory.push(purchaseRecord);
+                localStorage.setItem('purchaseHistory', JSON.stringify(purchaseHistory));
+            }
+            
+            // 清空購物車
+            cart = [];
+            saveCartToStorage();
+            updateCartDisplay();
+            
+            // 關閉結帳表單
+            checkoutForm.classList.remove('active');
         }
 
         // 購物車操作
@@ -1250,7 +1750,7 @@
                 cartHTML += `
                     <div class="cart-item" data-id="${item.id}">
                         <div class="cart-item-image">
-                            <i class="fas fa-paw"></i>
+                            <i class="fas ${item.image || 'fa-gamepad'}"></i>
                         </div>
                         <div class="cart-item-details">
                             <div class="cart-item-title">${item.name}</div>
@@ -1284,6 +1784,74 @@
             if (savedCart) {
                 cart = JSON.parse(savedCart);
             }
+        }
+
+        // 搜尋功能
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (!searchTerm.trim()) {
+                renderProducts(gameProducts);
+                return;
+            }
+            
+            const filteredProducts = gameProducts.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) ||
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            
+            renderProducts(filteredProducts);
+        }
+
+        // 開啟後台管理面板
+        function openAdminPanel() {
+            if (!currentUser || currentUser.email !== "admin@example.com") {
+                alert("僅管理員可使用後台！");
+                return;
+            }
+            adminPanel.classList.add('open');
+            loadUsersData();
+        }
+
+        // 關閉後台管理面板
+        function closeAdminPanel() {
+            adminPanel.classList.remove('open');
+        }
+
+        // 加載用戶資料
+        function loadUsersData() {
+            // 更新用戶列表
+            usersList.innerHTML = '';
+            users.forEach(user => {
+                usersList.innerHTML += `
+                    <div class="admin-item">
+                        <span><strong>${user.name}</strong></span>
+                        <span>${user.email}</span>
+                    </div>
+                `;
+            });
+            
+            // 更新購物車紀錄
+            cartHistoryList.innerHTML = '';
+            // 這裡可以顯示購物車歷史
+            cartHistoryList.innerHTML = `<div class="admin-item"><span>目前購物車紀錄</span></div>`;
+            
+            // 更新消費紀錄
+            purchaseHistoryList.innerHTML = '';
+            purchaseHistory.forEach(record => {
+                purchaseHistoryList.innerHTML += `
+                    <div class="admin-item">
+                        <span><strong>${record.user}</strong></span>
+                        <span>NT$${record.amount}</span>
+                    </div>
+                `;
+            });
+        }
+
+        // 匯出資料
+        function exportData() {
+            alert('資料匯出功能已啟用，實際應用中會產生CSV檔案');
+            // 這裡應該實現真正的匯出功能
         }
 
         // 分類切換
